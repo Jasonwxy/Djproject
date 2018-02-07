@@ -17,9 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from demo import views
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', views.hello),
     path('current_time/', views.current_time),
+    path('', views.hello),
 ]
