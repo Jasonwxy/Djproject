@@ -6,7 +6,7 @@ import time
 # Create your views here.
 
 def hello(request):
-    return HttpResponse('<h1>Hello world!</h1>')
+    return HttpResponse('<h1>Hello world!</h1> <br/> <a href="https://www.baidu.com">跳转到百度</a>')
 
 
 def current_time(request):
