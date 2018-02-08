@@ -2,14 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>last_book</title>
+    <title>My first vue page</title>
+    <script src="vue.js"></script>
 </head>
 <body>
-<h1>Books</h1>
-<ul>
-{% for book in book_list %}
-<li>{{ book.name }}</li>
-{% endfor %}
-</ul>
+<div id="app">
+    {{ message }}
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'hello vue!'
+        }
+    })
+</script>
 </body>
 </html>
