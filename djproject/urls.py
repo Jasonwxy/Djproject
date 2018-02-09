@@ -14,8 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path      # 路由模式
-from django.urls import re_path   # 正则表达式模式
+from django.urls import path  # 路由模式
+from django.urls import re_path  # 正则表达式模式
 from demo import views
 
 urlpatterns = [
@@ -23,5 +23,6 @@ urlpatterns = [
     path('hello/', views.hello),
     path('current_time/', views.current_time),
     path('', views.hello),
-    re_path('hello/', views.hello)
+    re_path('hello/', views.hello),
+    re_path('^test/([0-9]{1,2})/$', views.test),  # 正则表达式用括号括起，表示将匹配到的值作为参数传递给views.text()方法
 ]

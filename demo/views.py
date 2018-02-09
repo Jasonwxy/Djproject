@@ -1,6 +1,6 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 import time
+import datetime
 
 
 # Create your views here.
@@ -11,3 +11,9 @@ def hello(request):
 
 def current_time(request):
     return HttpResponse('<h1>Current time is ' + time.strftime('%Y-%m-%d %H:%M:%S') + '</h1>')
+
+
+def test(request, offset):
+    offset = int(offset)
+    dt = datetime.datetime.now() + datetime.timedelta(hours=offset)
+    return HttpResponse('ok! offset is ' + str(offset) + ' ' + str(dt))
