@@ -34,11 +34,16 @@ def notice(request):
 ship on {{ ship_date|date:"F j, Y" }}.</p>
 
 <p>Here are the items you've ordered:</p>
-<ul>
+<table>
 {% for item in item_list %}
-    <li>{{ forloop.revcounter }}:{{ item }}</li>
+    {% if forloop.first %}
+    <tr><th>ID</th><th>NAME</th></tr>
+    <tr><td>{{ forloop.counter }}</td><td>{{ item }}</td></tr>
+    {% else %}
+    <tr><td>{{ forloop.counter }}</td><td>{{ item }}</td></tr>
+    {% endif %}
 {% endfor %}
-</ul>
+</table>
 
 {% if ordered_warranty %}
     <p>Your warranty information will be included in the packaging.</p>
