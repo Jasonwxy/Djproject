@@ -1,10 +1,14 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 import time
 import datetime
 from django.template import Template, Context
 
 
 # Create your views here.
+def index(request):
+    return render(request, 'latest.html')
+
 
 def hello(request):
     return HttpResponse('<h1>Hello world!</h1> <br/> <a href="https://www.baidu.com">跳转到百度</a>')
