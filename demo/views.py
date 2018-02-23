@@ -1,13 +1,13 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-import time
-import datetime
+from django.shortcuts import render, render_to_response
+import time, datetime
 from django.template import Template, Context
+import pymysql
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'latest.html')
+    return render(request, 'index.html')
 
 
 def hello(request):
@@ -22,6 +22,16 @@ def test(request, offset):
     offset = int(offset)
     dt = datetime.datetime.now() + datetime.timedelta(hours=offset)
     return HttpResponse('ok! offset is ' + str(offset) + ' ' + str(dt))
+
+
+def get_names(request):
+    db = pymysql.Connect('localhost', 'django', 'zx123456', 'django', 3306, charset='utf8')
+    cursor = db.cursor()
+    cursor.execute('select name from django.province')
+    names = [row[0] for row in cursor.fetchall()]
+    print(names)
+    db.close()
+    return render_to_response('index.html', {'names': names})
 
 
 def notice(request):
