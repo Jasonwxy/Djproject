@@ -29,7 +29,6 @@ def get_names(request):
     cursor = db.cursor()
     cursor.execute('select name from django.province')
     names = [row[0] for row in cursor.fetchall()]
-    print(names)
     db.close()
     return render_to_response('index.html', {'names': names})
 
