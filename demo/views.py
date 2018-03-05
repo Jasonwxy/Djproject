@@ -76,10 +76,16 @@ ship on {{ ship_date|date:"F j, Y" }}.</p>
 
 
 def display_meta(request):
-    dict_meta = request.META
-    string = '<table><tr><th>KEY</th><th>VALUES</th></tr>'
-    for x in dict_meta:
-        string = string + '<tr><td>{0}</td><td>{1}</td></tr>'.format(x, dict_meta[x])
-    html_string = string + '</table>'
+    dict_meta = request.META.items()
+    return render_to_response('meta.html', {'meta_list': dict_meta})
 
-    return HttpResponse(html_string)
+
+def search_form(request):
+    return render_to_response('search.html')
+
+
+def search_result(request):
+    if not request.GET['q'] == '':
+        return HttpResponse('接到的值为 %s' % request.GET['q'])
+    else:
+        return HttpResponse('输入值为空')

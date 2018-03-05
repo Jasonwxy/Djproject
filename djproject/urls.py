@@ -26,5 +26,7 @@ urlpatterns = [
     re_path('hello/', views.hello),
     re_path('^test/([0-9]{1,2})/$', views.test),  # 正则表达式用括号括起，表示将匹配到的值作为参数传递给views.text()方法
     path('notice/', views.notice),
-    path('display_meta/', views.display_meta)
+    path('display_meta/', views.display_meta),
+    path('search_form/', views.search_form),
+    path('search_result/', views.search_result)
 ]
