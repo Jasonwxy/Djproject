@@ -73,3 +73,13 @@ ship on {{ ship_date|date:"F j, Y" }}.</p>
                    'item_list': ['Python', 'Java', 'C++', 'PHP', 'MySQL'], 'ordered_warranty': 'True'}
     c = Context(raw_context)
     return HttpResponse(t.render(c))
+
+
+def display_meta(request):
+    dict_meta = request.META
+    string = '<table><tr><th>KEY</th><th>VALUES</th></tr>'
+    for x in dict_meta:
+        string = string + '<tr><td>{0}</td><td>{1}</td></tr>'.format(x, dict_meta[x])
+    html_string = string + '</table>'
+
+    return HttpResponse(html_string)
