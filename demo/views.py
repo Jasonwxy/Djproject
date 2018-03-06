@@ -3,6 +3,7 @@ from django.shortcuts import render, render_to_response
 import time, datetime
 from django.template import Template, Context
 import pymysql
+from demo.models import Province, City, Area
 
 
 # Create your views here.
@@ -85,7 +86,18 @@ def search_form(request):
 
 
 def search_result(request):
-    if not request.GET['q'] == '':
-        return HttpResponse('接到的值为 %s' % request.GET['q'])
+    search_str = request.GET['q']
+    if search_str == '':
+        return render_to_response('search.html', {'message': '请输入正确的查询关键字'})
     else:
-        return HttpResponse('输入值为空')
+        province_list = Province.objects.filter(name__icontains=search_str)
+        city_list = City.objects.filter(name__icontains=search_str)
+        if province_list.__len__() > 0 and city_list.__len__() == 0:
+            lists = City.objects.filter(province_code=province_list[0].code)
+            search_str = province_list[0].name
+        elif city_list.__len__() > 0:
+            lists = Area.objects.filter(city_code=city_list[0].code)
+            search_str = city_list[0].name
+        else:
+            return render_to_response('search.html', {'message': '请输入正确的查询关键字'})
+    return render_to_response('search.html', {'lists': lists, 'query': search_str})

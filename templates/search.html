@@ -6,8 +6,20 @@
 </head>
 <body>
 <form method="get" action="/search_result/">
-    <label>请输入查询内容 <input type="text" name="q"></label>
+    <label>请输入查询省市名称 <input type="text" name="q"></label>
     <button type="submit" value="Search">搜索</button>
+    <span style="color: #ff0000;">{% if message != None %}{{ message }}{% endif %}</span>
+
 </form>
+<div>
+    {% if lists != None %}
+        <p>{{ query }}的下级市区为：</p>
+        <ol>
+        {% for list in lists %}
+            <li>{{ list.name }}</li>
+        {% endfor %}
+        </ol>
+    {% endif %}
+</div>
 </body>
 </html>
