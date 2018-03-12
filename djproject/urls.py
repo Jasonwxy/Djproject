@@ -29,5 +29,6 @@ urlpatterns = [
     path('notice/', views.notice),
     path('display_meta/', views.display_meta),
     path('search_form/', views.search_form),
-    path('search_result/', views.search_result)
+    path('search_result/', views.search_result),
+    path('cases/', views.get_case_list)
 ]

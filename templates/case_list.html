@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>case list</title>
+</head>
+<body>
+<div>
+<ul>
+    {% for list in base_list %}
+        <li><a href="?dir_name={{ list }}">{{ list }}</a></li>
+        {% if list is not None %}
+            {% for sub in sub_list %}
+            <li><a href="?dir_name={{ sub }}">{{ sub }}</a></li>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+</ul>
+</div>
+</body>
+</html>

@@ -1,9 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render, render_to_response
-import time, datetime
+import time, datetime, pymysql, os
 from django.template import Template, Context
-import pymysql
 from demo.models import Province, City, Area
+from common.common import read_file_list
 
 
 # Create your views here.
@@ -101,3 +101,13 @@ def search_result(request):
         else:
             return render_to_response('search.html', {'message': '请输入正确的查询关键字'})
     return render_to_response('search.html', {'lists': lists, 'query': search_str})
+
+
+def get_case_list(request):
+    base_path = 'E:\\working\\wutaishan45\\cases'
+    base_list = read_file_list(base_path)
+    if 'dir_name' in request.GET:
+        dir_name = request.GET['dir_name']
+        sub_list = read_file_list(os.path.join(base_path, dir_name))
+        return render_to_response('case_list.html', {'base_list': base_list, dir_name: sub_list})
+    return render_to_response('case_list.html', {'base_list': base_list})
