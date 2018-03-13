@@ -105,9 +105,5 @@ def search_result(request):
 
 def get_case_list(request):
     base_path = 'E:\\working\\wutaishan45\\cases'
-    base_list = read_file_list(base_path)
-    if 'dir_name' in request.GET:
-        dir_name = request.GET['dir_name']
-        sub_list = read_file_list(os.path.join(base_path, dir_name))
-        return render_to_response('case_list.html', {'base_list': base_list, dir_name: sub_list})
-    return render_to_response('case_list.html', {'base_list': base_list})
+    file_list = read_file_list(base_path)
+    return render_to_response('case_list.html', {'data': file_list})

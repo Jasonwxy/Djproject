@@ -2,20 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css"/>
     <title>case list</title>
+    <script src="../static/js/vue.js"></script>
+    <link href="temp.vue">
 </head>
 <body>
 <div>
-<ul>
-    {% for list in base_list %}
-        <li><a href="?dir_name={{ list }}">{{ list }}</a></li>
-        {% if list is not None %}
-            {% for sub in sub_list %}
-            <li><a href="?dir_name={{ sub }}">{{ sub }}</a></li>
-            {% endfor %}
-        {% endif %}
+    {% for model in data %}
+        <p>{{ model }}</p>
     {% endfor %}
-</ul>
 </div>
 </body>
 </html>

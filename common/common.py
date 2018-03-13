@@ -9,14 +9,14 @@ def read_file_list(dir_path):
         files = os.listdir(dir_path)
         for file in files:
             if file != '__init__.py' and not file.endswith('log') and not file.endswith('pyc'):
-                file_list.append(file)
+                file_dict = {"name": file}
+                file_path = os.path.join(dir_path, file)
+                if os.path.isdir(file_path):
+                    file_dict["sub_node"] = read_file_list(file_path)
+                else:
+                    file_dict["sub_node"] = []
+                file_list.append(file_dict)
     return file_list
 
 
-def read_file_lists(dir_path):
-    file_walk = os.walk(dir_path)
-    for a, b, c in file_walk:
-        print(a, b, c)
-
-
-read_file_lists('E:\\working\\wutaishan45\\cases')
+print(read_file_list('E:\\working\\wutaishan45\\cases'))
