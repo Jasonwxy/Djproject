@@ -1,9 +1,13 @@
+import datetime
+import pymysql
+import time
+
 from django.http import HttpResponse
 from django.shortcuts import render, render_to_response
-import time, datetime, pymysql, os
 from django.template import Template, Context
+
+from demo.common.common import read_file_list
 from demo.models import Province, City, Area
-from common.common import read_file_list
 
 
 # Create your views here.
