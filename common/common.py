@@ -13,8 +13,8 @@ def read_file_list(dir_path):
                 file_path = os.path.join(dir_path, file)
                 if os.path.isdir(file_path):
                     file_dict["sub_node"] = read_file_list(file_path)
-                else:
-                    file_dict["sub_node"] = []
+                # else:
+                #     file_dict["sub_node"] = []
                 file_list.append(file_dict)
     return file_list
 

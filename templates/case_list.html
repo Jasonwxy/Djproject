@@ -3,15 +3,43 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" href="../static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css"/>
     <title>case list</title>
     <script src="../static/js/vue.js"></script>
-    <link href="temp.vue">
 </head>
 <body>
-<div>
-    {% for model in data %}
-        <p>{{ model }}</p>
-    {% endfor %}
+<div id="app">
+    <items :model="model" v-for="model in data"></items>
 </div>
+<script>
+    Vue.component('items', {
+        props: ['model'],
+        template: '<li><div @click=\'toggle\'><i v-if=\'isFolder\' class="fa " :class="[open?\'fa-folder-open\':\'fa-folder\']"></i><!--isFolder判断是否存在子级改变图标--><i v-if=\'!isFolder\' class="fa fa-file-text"></i> {{ model.name }}</div><ul v-show="open" v-if=\'isFolder\'><items v-for=\'cel in model.sub_node\' :model=\'cel\'></items></ul></li>',
+        data() {
+            return {
+                open: false,
+                isFolder: true
+            }
+        },
+        computed: {
+
+        },
+        methods: {
+            toggle: function() {
+                if(this.isFolder) {
+                    this.open = !this.open
+                }
+            },
+            isFolder:function() {
+                return this.model.sub_node && this.model.sub_node.length
+            }
+        }
+    });
+    var app = new Vue({
+        el:'#app',
+        data: { data: [{'name': 'client', 'sub_node': [{'name': 'login', 'sub_node': [{'name': 'case_login.py'}]}]}, {'name': 'scene', 'sub_node': [{'name': 'work_mode', 'sub_node': [{'name': 'professional_mode', 'sub_node': [{'name': 'flow.py'}]}]}]}, {'name': 'webui', 'sub_node': [{'name': 'approval', 'sub_node': [{'name': 'case_approval_process.py'}, {'name': 'case_my_approval.py'}]}, {'name': 'audit', 'sub_node': [{'name': 'case_audit_setting.py'}]}, {'name': 'login', 'sub_node': [{'name': 'case_login.py'}]}, {'name': 'my_account', 'sub_node': [{'name': 'case_my_account.py'}]}, {'name': 'system', 'sub_node': [{'name': 'system_setting', 'sub_node': [{'name': 'case_data_flow_backup_fast_channel.py'}, {'name': 'case_email_server_setting.py'}, {'name': 'case_user_data_import.py'}]}]}, {'name': 'user', 'sub_node': [{'name': 'case_user.py'}, {'name': 'usergroup', 'sub_node': [{'name': 'case_user_group.py'}]}]}]}]
+        }
+    });
+</script>
 </body>
 </html>
