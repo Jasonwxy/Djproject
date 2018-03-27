@@ -19,4 +19,6 @@ def read_file_list(dir_path):
     return file_list
 
 
-print(read_file_list('E:\\working\\wutaishan45\\cases'))
+# print(read_file_list('E:\\working\\wutaishan45\\cases'))
+config = os.path.join(os.path.abspath('.').split('\\Djproject')[0], 'abc\\ba\\d')
+print(config)
