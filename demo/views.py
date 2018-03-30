@@ -1,11 +1,10 @@
 import datetime
 import time
-
 import pymysql
+
 from django.http import HttpResponse
 from django.shortcuts import render, render_to_response
 from django.template import Template, Context
-
 from common.common import read_file_list
 from demo.models import Province, City, Area
 
